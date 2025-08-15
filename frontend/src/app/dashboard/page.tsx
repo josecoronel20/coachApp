@@ -23,9 +23,11 @@ const DashboardPage = () => {
         id: "abc",
         coachId: "abc",
         paymentDate: "2025-01-01",
+        notes:"tiene sobrepeso, no puede hacer squat con peso y debe hacer squat con 10kg",
         name: "Juan Perez",
         email: "juan.perez@gmail.com",
         phone: "1234567890",
+        bodyWeight: 80,
         routine: [
           [
             {
@@ -83,9 +85,11 @@ const DashboardPage = () => {
         id: "def",
         coachId: "abc",
         paymentDate: "2025-08-10",
+        notes: "Lesion en el antebrazo, no puede hacer bench press porque al cargar mucho peso sobre el hombro se siente dolor",
         name: "Matias Perez",
         email: "juan.perez@gmail.com",
         phone: "1234567890",
+        bodyWeight: 70,
         routine: [
           [
             {
