@@ -10,6 +10,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useCoachStore } from "@/store/coachStore";
+import { RoutineDay } from "@/types/routine";
+import { Exercise } from "@/types/routine";
 import { MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -23,11 +25,11 @@ const FeedbackBtn = () => {
     athletesInfo?.reduce(
       (acc, athlete) =>
         acc +
-        athlete.workoutPlan.reduce(
-          (dayAcc, workoutDay) =>
+        athlete.routine.reduce(
+          (dayAcc: number, routineDay: RoutineDay) =>
             dayAcc +
-            workoutDay.reduce(
-              (exerciseAcc, exercise) =>
+            routineDay.reduce(
+              (exerciseAcc: number, exercise: Exercise) =>
                 exerciseAcc + (exercise.athleteNotes !== null ? 1 : 0),
               0
             ),
@@ -40,8 +42,8 @@ const FeedbackBtn = () => {
   const feedbackList =
     athletesInfo
       ?.flatMap((athlete) =>
-        athlete.workoutPlan.flatMap((workoutDay) =>
-          workoutDay.map((exercise) => ({
+        athlete.routine.flatMap((routineDay: RoutineDay) =>
+          routineDay.map((exercise: Exercise) => ({
             athleteId: athlete.id,
             athleteName: athlete.name,
             exerciseName: exercise.exercise,

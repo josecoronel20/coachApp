@@ -26,7 +26,7 @@ const DashboardPage = () => {
         name: "Juan Perez",
         email: "juan.perez@gmail.com",
         phone: "1234567890",
-        workoutPlan: [
+        routine: [
           [
             {
               exercise: "Bench Press",
@@ -86,7 +86,7 @@ const DashboardPage = () => {
         name: "Matias Perez",
         email: "juan.perez@gmail.com",
         phone: "1234567890",
-        workoutPlan: [
+        routine: [
           [
             {
               exercise: "Bench Press",

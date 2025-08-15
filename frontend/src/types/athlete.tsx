@@ -1,4 +1,4 @@
-import { WorkoutPlan } from "./workoutPlan";
+import { Routine } from "./routine";
 
 export type Athlete = {
     id: string;
@@ -7,5 +7,5 @@ export type Athlete = {
     name: string;
     email?: string;
     phone: string;
-    workoutPlan: WorkoutPlan;
+    routine: Routine;
 }
