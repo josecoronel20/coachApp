@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-const AthleteInfo = ({ 
-  athlete, 
-  onSave 
-}: { 
+const AthleteInfo = ({
+  athlete,
+  onSave,
+}: {
   athlete: Athlete;
   onSave?: (updatedAthlete: Partial<Athlete>) => void;
 }) => {
@@ -19,7 +19,7 @@ const AthleteInfo = ({
     email: athlete.email || "",
     phone: athlete.phone,
     bodyWeight: athlete.bodyWeight || 0,
-    notes: athlete.notes || ""
+    notes: athlete.notes || "",
   });
 
   //number of notes to review
@@ -34,9 +34,9 @@ const AthleteInfo = ({
   );
 
   const handleInputChange = (field: string, value: string | number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -51,7 +51,7 @@ const AthleteInfo = ({
       email: athlete.email || "",
       phone: athlete.phone,
       bodyWeight: athlete.bodyWeight || 0,
-      notes: athlete.notes || ""
+      notes: athlete.notes || "",
     });
     setIsEditing(false);
   };
@@ -59,7 +59,7 @@ const AthleteInfo = ({
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-medium text-gray-900">Información Personal</h3>
+        <h3 className="font-medium text-foreground">Información Personal</h3>
         {!isEditing && (
           <Button
             variant="outline"
@@ -75,7 +75,7 @@ const AthleteInfo = ({
 
       {!isEditing ? (
         <div className="space-y-2">
-          <div className="text-sm text-gray-600 flex flex-col gap-2">
+          <div className="text-sm text-muted-foreground flex flex-col gap-2">
             <p>
               <strong>Nombre:</strong> {athlete.name}
             </p>
@@ -86,7 +86,8 @@ const AthleteInfo = ({
               <strong>Teléfono:</strong> {athlete.phone}
             </p>
             <p>
-              <strong>Peso corporal actual:</strong> {athlete.bodyWeight || "No registrado"} kg
+              <strong>Peso corporal actual:</strong>{" "}
+              {athlete.bodyWeight || "No registrado"} kg
             </p>
 
             <p
@@ -94,7 +95,7 @@ const AthleteInfo = ({
                 numberOfNotesToReview > 0 ? "text-red-700" : "text-green-700"
               } `}
             >
-              <strong className="text-gray-900">Notas del atleta:</strong>
+              <strong className="text-foreground">Notas del atleta:</strong>
               {numberOfNotesToReview > 0
                 ? ` hay ${numberOfNotesToReview} notas por revisar`
                 : " no hay notas por revisar"}
@@ -105,14 +106,16 @@ const AthleteInfo = ({
         <div className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Nombre</label>
+              <label className="text-sm font-medium text-gray-700">
+                Nombre
+              </label>
               <Input
                 value={formData.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
                 placeholder="Nombre del atleta"
               />
             </div>
-            
+
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700">Email</label>
               <Input
@@ -122,32 +125,45 @@ const AthleteInfo = ({
                 placeholder="email@ejemplo.com"
               />
             </div>
-            
+
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Teléfono</label>
+              <label className="text-sm font-medium text-gray-700">
+                Teléfono
+              </label>
               <Input
                 value={formData.phone}
                 onChange={(e) => handleInputChange("phone", e.target.value)}
                 placeholder="+34 600 000 000"
               />
             </div>
-            
+
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Peso corporal (kg)</label>
+              <label className="text-sm font-medium text-gray-700">
+                Peso corporal (kg)
+              </label>
               <Input
                 type="number"
                 value={formData.bodyWeight}
-                onChange={(e) => handleInputChange("bodyWeight", parseFloat(e.target.value) || 0)}
+                onChange={(e) =>
+                  handleInputChange(
+                    "bodyWeight",
+                    parseFloat(e.target.value) || 0
+                  )
+                }
                 placeholder="75"
                 disabled
                 className="bg-gray-100 cursor-not-allowed"
               />
-              <p className="text-xs text-gray-500 italic">Solo puede ser actualizado por el atleta</p>
+              <p className="text-xs text-gray-500 italic">
+                Solo puede ser actualizado por el atleta
+              </p>
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">Observaciones</label>
+            <label className="text-sm font-medium text-gray-700">
+              Observaciones
+            </label>
             <Textarea
               value={formData.notes}
               onChange={(e) => handleInputChange("notes", e.target.value)}
@@ -176,16 +192,16 @@ const AthleteInfo = ({
         </div>
       )}
 
-      {/* Medical Notes Display */}
+      {/* Notes */}
       {athlete.notes && !isEditing && (
         <div className="space-y-2">
-          <h3 className="font-medium text-gray-900 flex items-center space-x-2">
+          <h3 className="font-medium text-foreground flex items-center space-x-2">
             <FileText className="h-4 w-4" />
             <span>Observaciones del atleta</span>
           </h3>
-          <div className="text-sm text-gray-600 bg-blue-50 p-3 rounded-md">
+          <p className="text-sm text-muted-foreground bg-background p-3 rounded-md ">
             {athlete.notes}
-          </div>
+          </p>
         </div>
       )}
     </section>

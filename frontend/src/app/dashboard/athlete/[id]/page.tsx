@@ -37,7 +37,6 @@ const AthleteDetailsPage = ({ params }: { params: Promise<{ id: string }> }) => 
     );
   }
 
-
   const handleWhatsAppRoutine = () => {
     // TODO: Implement WhatsApp routine sending
     const message = `Hola ${athlete.name}! Aquí tienes tu rutina actualizada.`;
@@ -50,7 +49,7 @@ const AthleteDetailsPage = ({ params }: { params: Promise<{ id: string }> }) => 
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 shadow-sm p-2">
+      <div className="bg-card border-b border-border shadow-sm p-2">
         <div className="">
           <div className="flex flex-col justify-between items-center w-full gap-2">
             <div className="flex gap-4 items-center space-x-4 w-full justify-between">
@@ -60,7 +59,7 @@ const AthleteDetailsPage = ({ params }: { params: Promise<{ id: string }> }) => 
                   Volver
                 </Button>
               </Link>
-              <h1 className="text-xl font-semibold text-gray-900">
+              <h1 className="text-xl font-semibold text-foreground">
                 {athlete.name}
               </h1>
             </div>
@@ -77,7 +76,7 @@ const AthleteDetailsPage = ({ params }: { params: Promise<{ id: string }> }) => 
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-background">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Athlete Quick Info Card */}
           <div className="lg:col-span-1">

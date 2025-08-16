@@ -88,7 +88,7 @@ const FeedbackBtn = () => {
                       {feedback.exerciseName}
                     </p>
                   </div>
-                  <p>{feedback.feedback}</p>
+                  <p className="text-sm text-red-500">{feedback.feedback}</p>
                 </div>
 
                 <Link href={`/dashboard/athlete/${feedback.athleteId}`}>

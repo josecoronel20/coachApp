@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Input } from "../ui/input";
+import AthleteNotesEdit from "./AthleteNotesEdit";
 
 const EditRoutineSection = ({
   routine,
@@ -53,11 +54,21 @@ const EditRoutineSection = ({
                       {exercise.sets.length} series | Rango: {exercise.range[0]}
                       -{exercise.range[1]} reps
                     </p>
-                    {isNewRoutine &&
+                    {!isNewRoutine &&
                       "weight" in exercise &&
                       exercise.weight && (
                         <p className="text-sm text-muted-foreground">
                           Peso actual: {exercise.weight}kg
+                        </p>
+                      )}
+
+                    {!isNewRoutine &&
+                      "exerciseHistory" in exercise &&
+                      exercise.exerciseHistory &&
+                      exercise.exerciseHistory.length > 0 && (
+                        <p className="text-sm text-muted-foreground">
+                          reps actuales:{" "}
+                          {exercise.exerciseHistory[0].sets.join(" - ")}
                         </p>
                       )}
                   </div>
@@ -66,7 +77,7 @@ const EditRoutineSection = ({
                       Nota del profe: {exercise.coachNotes}
                     </p>
                   )}
-                  {isNewRoutine &&
+                  {!isNewRoutine &&
                     "athleteNotes" in exercise &&
                     exercise.athleteNotes && (
                       <p className="text-xs text-red-600">
@@ -88,32 +99,24 @@ const EditRoutineSection = ({
                       </DialogTitle>
                     </DialogHeader>
                     <div className="flex flex-col gap-4 py-4">
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">
-                          Nombre del ejercicio
-                        </label>
-                        <Input type="text" defaultValue={exercise.exercise} />
+                      <div className="grid grid-cols-4 gap-2">
+                        <div className="space-y-2 col-span-3">
+                          <label className="text-sm font-medium">
+                            Nombre del ejercicio
+                          </label>
+                          <Input type="text" defaultValue={exercise.exercise} />
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">Series</label>
+                          <Input
+                            type="number"
+                            defaultValue={exercise.sets.length || 0}
+                            placeholder="Ej: 8"
+                          />
+                        </div>
                       </div>
 
-                      {isNewRoutine &&
-                        "weight" in exercise &&
-                        exercise.weight && (
-                          <p>
-                            Peso actual configurado por el atleta:{" "}
-                            {exercise.weight}kg
-                          </p>
-                        )}
-
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium">
-                          Cantidad de series
-                        </label>
-                        <Input
-                          type="number"
-                          defaultValue={exercise.sets.length || 0}
-                          placeholder="Ej: 8"
-                        />
-                      </div>
                       <div className="space-y-2">
                         <label className="text-sm font-medium">
                           Rango de repeticiones
@@ -135,6 +138,26 @@ const EditRoutineSection = ({
                           <p>repeticiones</p>
                         </div>
                       </div>
+
+                      {/* values that can be modified onlyby the athlete */}
+                      {!isNewRoutine &&
+                        "exerciseHistory" in exercise &&
+                        exercise.exerciseHistory &&
+                        exercise.exerciseHistory.length > 0 && (
+                          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                            <p>Datos modificables por el atleta:</p>
+                            <div className="flex justify-between">
+                              <p>
+                                peso actual:{" "}
+                                {exercise.exerciseHistory[0].weight}kg
+                              </p>
+                              <p>
+                                reps en cada serie:{" "}
+                                {exercise.exerciseHistory[0].sets.join("-")}
+                              </p>
+                            </div>
+                          </div>
+                        )}
                       <div className="space-y-2">
                         <label className="text-sm font-medium">
                           Nota del entrenador
@@ -144,6 +167,18 @@ const EditRoutineSection = ({
                           defaultValue={exercise.coachNotes || ""}
                         />
                       </div>
+                    </div>
+
+                    {/* athlete notes*/}
+                    {!isNewRoutine &&
+                      "athleteNotes" in exercise &&
+                      exercise.athleteNotes && (
+                        <AthleteNotesEdit notes={exercise.athleteNotes} />
+                      )}
+
+                    {/* save button */}
+                    <div className="flex justify-end">
+                      <Button type="submit">Guardar</Button>
                     </div>
                   </DialogContent>
                 </Dialog>
